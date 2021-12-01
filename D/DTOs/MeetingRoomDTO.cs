@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Dоmain.DTOs
 {
     public class MeetingRoomDTO
     {
-        public long Id { get; set; }
+        public Guid Id { get; set; }
 
         public DateTime MeetingTime { get; set; }
 
+        public TimeSpan Duration { get; set; }
+
         public string MeetingTheme { get; set; }
 
-        public UserDTO Booker { get; set; }
+        public UserDTO MeetingOwner { get; set; }
 
         // EntityFramework
         public ICollection<UserDTO> RequiredParticipants { get; set; }

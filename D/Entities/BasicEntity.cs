@@ -8,6 +8,10 @@ namespace Dоmain.Entities
 {
     public abstract class BasicEntity
     {
-        public long Id { get; set; }
+        public Guid Id { get; set; }
+
+        public DateTime CreatedTime { get; set; }
+
+        public DateTime UpdatedDate { get; set; }
     }
 }

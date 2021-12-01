@@ -1,4 +1,5 @@
-﻿using Dоmain.DTOs;
+﻿using Domain.Models;
+using Dоmain.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,15 +8,12 @@ using System.Threading.Tasks;
 
 namespace Application.Repos
 {
-    public interface IWorkingPlaceRepos<T> where T : class
+    public interface IWorkingPlaceRepos
     {
-        Task<IList<T>> GetAllWorkingPlaces();
+        Task<IList<WorkingPlace>> GetAllWorkingPlaces();
+        Task<IList<WorkingPlace>> GetAllBookedWorkingPlaces(DateTime working_place_bookingDate);
 
-        Task<IList<T>> GetAllBookedWorkingPlaces(DateTime working_place_bookingDate);
-
-        Task<IList<T>> GetAllAvailableWorkingPlaces(DateTime working_place_bookingDate);
-
-        Task<T> FetchWorkingPlaceById(long working_placeId);
-        void UpdateWorkingPlaces(T working_place);
+        Task<WorkingPlace> GetWorkingPlaceByPlaceNumber(int placeNum);
+        Task Commit();
     }
 }

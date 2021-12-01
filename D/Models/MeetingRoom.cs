@@ -11,9 +11,10 @@ namespace Dоmain.Models
     {
         public DateTime MeetingTime { get; set; }
         public string MeetingTheme { get; set; }
+        public TimeSpan Duration { get; set; }
 
         // Entity Framework
-        public User Booker { get; set; }
+        public User MeetingOwner { get; set; }
 
         public ICollection<MeetingRequiredParticipant> MeetingRequiredParticipants { get; set; }
 

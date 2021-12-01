@@ -10,10 +10,10 @@ namespace Dоmain.Models
     public class MeetingRequiredParticipant : BasicEntity
     {
 
-        public long ParticipantId { get; set; }
+        public Guid ParticipantId { get; set; }
         public User RequiredParticipant { get; set; }
 
-        public long MeetingId { get; set; }
+        public Guid MeetingId { get; set; }
         public MeetingRoom Meeting { get; set; }
     }
 }

@@ -5,8 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Behaviour\WorkingPlace\" />
-    <Folder Include="Validators\" />
+    <Compile Remove="Behaviour\Booking\NewFolder1\**" />
+    <Compile Remove="Behaviour\Booking\NewFolder2\**" />
+    <Compile Remove="Behaviour\Booking\NewFolder\**" />
+    <EmbeddedResource Remove="Behaviour\Booking\NewFolder1\**" />
+    <EmbeddedResource Remove="Behaviour\Booking\NewFolder2\**" />
+    <EmbeddedResource Remove="Behaviour\Booking\NewFolder\**" />
+    <None Remove="Behaviour\Booking\NewFolder1\**" />
+    <None Remove="Behaviour\Booking\NewFolder2\**" />
+    <None Remove="Behaviour\Booking\NewFolder\**" />
   </ItemGroup>
 
   <ItemGroup>

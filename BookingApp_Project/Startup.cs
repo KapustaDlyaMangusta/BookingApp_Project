@@ -21,6 +21,7 @@ using MediatR;
 using System.Reflection;
 using Infrastructure;
 using WebUI.Injection;
+using Microsoft.AspNetCore.Cors;
 
 namespace WebUI
 {
@@ -67,10 +68,19 @@ namespace WebUI
 
             app.UseAuthorization();
 
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod());
+
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
+            
+           
         }
     }
 }

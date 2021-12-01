@@ -14,7 +14,7 @@ namespace Domain.Models
     {   
         public int  NumPlace { get; set; }
 
-
+        //Entity Framework
         public ICollection<WorkingPlaceBooking> WorkingPlaceBookings { get; set; }
     }
 }

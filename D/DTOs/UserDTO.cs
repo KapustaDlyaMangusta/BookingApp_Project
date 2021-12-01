@@ -11,12 +11,11 @@ namespace Dоmain.DTOs
 {
     public class UserDTO
     {
-        public long Id { get; set; }
+        public Guid Id { get; set; }
 
-        public string UserFirstName { get; set; }
-        public string UserLastName { get; set; }
+        public string UserName { get; set; }
 
-        public string UserAvatarUrl { get; set; }
+        public string AvatarUrl { get; set; }
 
         public RoleOfUser Role { get; set; }
         

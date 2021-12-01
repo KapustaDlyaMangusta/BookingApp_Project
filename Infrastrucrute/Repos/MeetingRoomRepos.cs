@@ -1,16 +1,15 @@
 ﻿using Application.Mappers;
 using Application.Repos;
-using Dоmain.DTOs;
+using Dоmain.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Repos
 {
-    public class MeetingRoomRepos : IMeetingRoomRepos<MeetingRoomDTO>
+    public class MeetingRoomRepos : IMeetingRoomRepos
     {
         private readonly AppDbContext _context;
 
@@ -19,33 +18,22 @@ namespace Infrastructure.Repos
             _context = context;
         }
 
-        public async Task<IList<MeetingRoomDTO>> GetAllMeetings(DateTime meetingDate)
+        public async Task<IList<MeetingRoom>> GetAllMeetings(DateTime meetingDate)
         {
             return await _context.Meetings
                 .Where(x => x.MeetingTime.Date == meetingDate)
-                .Select(x => MeetingRoomMapper.MappingDTO(x))
                 .ToListAsync();
         }
 
-        public async Task<MeetingRoomDTO> FindMeetingById(long meetingId)
+        public async Task AddMeeting(MeetingRoom meeting)
         {
-            return MeetingRoomMapper.MappingDTO(await _context.Meetings.FindAsync(meetingId));
+            await _context.AddAsync(meeting);
         }
 
-        public async Task AddMeeting(MeetingRoomDTO meetingDto)
-        {
-            await _context.AddAsync(MeetingRoomMapper.MappingModel(meetingDto));
-        }
 
-        public async Task RemoveMeeting(long meetingId)
+        public async Task Commit()
         {
-            var meeting = await _context.Meetings.FindAsync(meetingId);
-            _context.Remove(meeting);
-        }
-
-        public void UpdateMeeting(MeetingRoomDTO meetingDto)
-        {
-            _context.Update(MeetingRoomMapper.MappingModel(meetingDto));
+            await _context.SaveChangesAsync();
         }
     }
 }

@@ -17,7 +17,10 @@ namespace Application.Mappers
             var config = new MapperConfiguration(cfg =>
                     cfg.CreateMap<WorkingPlace, WorkingPlaceDTO>()
                     .ForMember(nameof(WorkingPlaceDTO.WorkingPlaceBookings),
-                        src => src.MapFrom(arr => arr.WorkingPlaceBookings.Select(item => new WorkingPlaceBookingDTO {
+                        src => src.MapFrom(arr => 
+                        arr.WorkingPlaceBookings
+                        .Select(item => new WorkingPlaceBookingDTO {
+                            BookingDay = item.BookingDay,
                             Date = item.Date,
                             Id = item.Id,
                             Status = item.Status,
@@ -28,23 +31,6 @@ namespace Application.Mappers
 
             IMapper map = config.CreateMapper();
             return map.Map<WorkingPlace, WorkingPlaceDTO>(source);
-        }
-        public static WorkingPlace MappingModel(WorkingPlaceDTO source)
-        {
-            var config = new MapperConfiguration(cfg =>
-                    cfg.CreateMap<WorkingPlaceDTO, WorkingPlace>()
-                    .ForMember(nameof(WorkingPlace.WorkingPlaceBookings),
-                        src => src.MapFrom(arr => arr.WorkingPlaceBookings.Select(item => new WorkingPlaceBooking {
-                            Date = item.Date,
-                            Id = item.Id,
-                            Status = item.Status,
-                            Type = item.Type,
-                        }))));
-
-
-
-            IMapper map = config.CreateMapper();
-            return map.Map<WorkingPlaceDTO, WorkingPlace>(source);
         }
     }
 }

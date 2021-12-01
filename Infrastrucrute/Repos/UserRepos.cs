@@ -1,17 +1,14 @@
-﻿using Application.Mappers;
-using Application.Repos;
-using Dоmain.DTOs;
+﻿using Application.Repos;
 using Dоmain.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+
 
 namespace Infrastructure.Repos
 {
-    public class UserRepos : IUserRepos<UserDTO>
+    public class UserRepos : IUserRepos
     {
         private readonly AppDbContext _context;
 
@@ -19,26 +16,15 @@ namespace Infrastructure.Repos
         {
             _context = context;
         }
-        public async Task<IList<UserDTO>> GetAllUsers()
+
+        public async Task<IList<User>> GetAllUsers()
         {
-            return await _context.Users.Include(x => x.WorkingPlaceBookings)
-                .Select(x => UserMapper.MappingDTO(x))
-                .ToArrayAsync();
+            return await _context.Users
+                .ToListAsync();
         }
-
-        public async Task<UserDTO> FindUserById(long userId)
+        public async Task Commit()
         {
-            var user = await _context.Users
-                .Include(x => x.WorkingPlaceBookings)
-                .ThenInclude(x => x.User)
-                .FirstOrDefaultAsync(x => x.Id == userId);
-
-            return UserMapper.MappingDTO(user);
-        }
-
-        public async Task AddUser(UserDTO userDTO)
-        {
-            await _context.Users.AddAsync(UserMapper.MappingModel(userDTO));
+            await _context.SaveChangesAsync();
         }
     }
 }

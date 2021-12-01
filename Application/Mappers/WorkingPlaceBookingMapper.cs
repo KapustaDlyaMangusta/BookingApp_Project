@@ -18,10 +18,9 @@ namespace Application.Mappers
                 cfg.CreateMap<WorkingPlaceBooking, WorkingPlaceBookingDTO>()
                 .ForMember(nameof(WorkingPlaceBookingDTO.User),
                     src => src.MapFrom(item => new UserDTO {
-                        Id = item.Id,
-                        UserFirstName = item.User.UserFirstName,
-                        UserLastName = item.User.UserLastName,
-                        UserAvatarUrl = item.User.UserAvatarUrl,
+                        Id = item.User.Id,
+                        UserName = item.User.UserName,
+                        AvatarUrl = item.User.AvatarUrl,
                         Role = item.User.Role,
                     }))
                 .ForMember(nameof(WorkingPlaceBookingDTO.WorkingPlace),
@@ -33,28 +32,6 @@ namespace Application.Mappers
 
             IMapper map = config.CreateMapper();
             return map.Map<WorkingPlaceBooking, WorkingPlaceBookingDTO>(source);
-        }
-        public static WorkingPlaceBooking MappingModel(WorkingPlaceBookingDTO source)
-        {
-            var config = new MapperConfiguration(cfg =>
-                cfg.CreateMap<WorkingPlaceBookingDTO, WorkingPlaceBooking>()
-                .ForMember(nameof(WorkingPlaceBooking.User),
-                    src => src.MapFrom(item => new User {
-                        Id = item.Id,
-                        UserFirstName = item.User.UserFirstName,
-                        UserLastName = item.User.UserLastName,
-                        UserAvatarUrl = item.User.UserAvatarUrl,
-                        Role = item.User.Role,
-                    }))
-                .ForMember(nameof(WorkingPlaceBookingDTO.WorkingPlace),
-                    src => src.MapFrom(item => new WorkingPlace {
-                        Id = item.WorkingPlace.Id,
-                        NumPlace = item.WorkingPlace.NumPlace,
-                    })));
-
-
-            IMapper map = config.CreateMapper();
-            return map.Map<WorkingPlaceBookingDTO, WorkingPlaceBooking>(source);
         }
     }
 }

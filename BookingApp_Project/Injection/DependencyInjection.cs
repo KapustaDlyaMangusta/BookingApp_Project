@@ -5,15 +5,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using Application.Repos;
 using Infrastructure.Repos;
-using Application.UnitOfWork;
+using Dоmain.Models;
+using Domain.Models;
 
 namespace WebUI.Injection
 {
     public static class DependencyInjection 
     {
         public static IServiceCollection AddReposConfiguration(this IServiceCollection services)
-            => services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-
+            => services.AddScoped<IUserRepos, UserRepos>()
+                .AddScoped<IWorkingPlaceRepos, WorkingPlaceRepos>()
+                .AddScoped<IWorkingPlaceBookingRepos, WorkingPlaceBookingRepos>()
+                .AddScoped<IMeetingRoomRepos, MeetingRoomRepos>();
     }
 }

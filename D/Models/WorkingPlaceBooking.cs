@@ -13,11 +13,12 @@ namespace Dоmain.Models
     {  
         public BookingStatuses Status { get; set; }
         public BookingType Type { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
+        public int BookingDay { get; set; }
 
         //  EntityFramework  
-        public long UserId { get; set; }
-        public long WorkingPlaceId { get; set; }
+        public Guid UserId { get; set; }
+        public Guid WorkingPlaceId { get; set; }
         public User User { get; set; }
         public WorkingPlace WorkingPlace { get; set; }
         

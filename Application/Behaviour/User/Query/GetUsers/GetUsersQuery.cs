@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace Application.Behaviour.User.Query.GetUsers
 {
-    
-   
+    public class GetUsersQuery : IRequest<IList<UsersResponseQuery>>
+    {
+    }
+
 }

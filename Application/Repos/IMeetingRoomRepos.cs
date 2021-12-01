@@ -1,4 +1,5 @@
 ﻿using Dоmain.DTOs;
+using Dоmain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,16 +8,12 @@ using System.Threading.Tasks;
 
 namespace Application.Repos
 {
-    public interface IMeetingRoomRepos<T> where T : class
+    public interface IMeetingRoomRepos
     { 
-        Task<IList<T>> GetAllMeetings(DateTime meetingTime);
+        Task<IList<MeetingRoom>> GetAllMeetings(DateTime meetingTime);
 
-        Task<T> FindMeetingById(long meetingId);
+        Task AddMeeting(MeetingRoom meeting);
 
-        Task AddMeeting(T meeting);
-
-        Task RemoveMeeting(long meetingId);
-
-        void UpdateMeeting(T meeting);
+        Task Commit();
     }
 }
